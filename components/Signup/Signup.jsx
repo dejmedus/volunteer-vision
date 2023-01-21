@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { getSupabase } from "../../../utils/supabase";
+import { getSupabase } from "../../utils/supabase";
 
 import { ToggleButtonGroup, ToggleButton, TextField, Button } from "@mui/material";
 import styles from './Signup.module.css'

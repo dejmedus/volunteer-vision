@@ -5,8 +5,9 @@ import { getSupabase } from "../utils/supabase";
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { Navbar } from "./components/Navbar";
-import { Signup } from "./components/Signup/Signup";
+import { Navbar } from "../components/Navbar";
+import { Signup } from "../components/Signup/Signup";
+
 
 export default function Home({ userProfile }) {
   // redirect to org page or all projects upon signin

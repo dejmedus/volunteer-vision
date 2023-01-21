@@ -2,11 +2,10 @@ import Head from "next/head";
 import styles from "@/styles/Project.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../../components/Navbar";
 import { Box } from "@mui/material";
-import Link from "next/link";
 import { Stack } from "@mui/system";
-import All_Individual from "../components/Project/All_Individual";
+import All_Individual from "../../components/Project/All_Individual";
 
 // All projects
 const all = ({ userProfile, projects }) => {
@@ -20,8 +19,8 @@ const all = ({ userProfile, projects }) => {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        <h1>All Projects</h1>
         <Box className={styles.all_projects_box}>
+          <h1>All Projects</h1>
           <Stack spacing={2} my={2}>
           {projects?.length > 0 ? (
             projects.map((project) => (
@@ -30,6 +29,8 @@ const all = ({ userProfile, projects }) => {
                 project_id={project.project_id}
                 name={project.name}
                 description={project.description}
+                location={project.location}
+                image_url={project.image_url}
               />
             ))
           ) : (
