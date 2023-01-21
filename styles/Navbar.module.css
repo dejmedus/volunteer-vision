@@ -1,0 +1,15 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    margin-left: 2rem;
+}
+
+.navigation {
+    margin-left: 8rem;
+    display: flex;
+    flex-direction: row;
+}
