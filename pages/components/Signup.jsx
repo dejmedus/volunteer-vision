@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { getSupabase } from "../../utils/supabase";
 
-const Signup = ({ user }) => {
+export const Signup = ({ user }) => {
     const [formData, setFormData] = useState(user);
 
     const onChange = (e) => {
@@ -67,8 +67,6 @@ const Signup = ({ user }) => {
         </form>
     )
 }
-
-export default Signup
 
 const OrgInputs = ({ onChange }) => {
     return (
