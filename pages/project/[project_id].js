@@ -1,15 +1,28 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Project.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Navbar } from "../components/navbar";
+import { useEffect, useState } from "react";
 
 // Individual project page
 export default function project_id({ user }) {
   const router = useRouter()
   const { project_id } = router.query
+
+  const [project, setProject] = useState([])
+  const supabase = getSupabase(user.accessToken)
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      const { data } = await supabase.from('project').select('*').eq('project_id', project_id)
+      setProject(data[0])
+    }
+
+    fetchProject()
+  }, [])
 
   return (
     <>
@@ -21,11 +34,9 @@ export default function project_id({ user }) {
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <h1>Project {project_id}</h1>
-          Welcome {user.name}!{' '}
-          <Link href="/api/auth/logout">
-            Logout
-          </Link>
+        {project != undefined ? <h2>{project.name}</h2>:  null}
+        {project != undefined? <h3>Project ID Number: {project_id}</h3> : null}
+        {project != undefined ? <p>{project.description}</p> : null}
       </main>
     </>
   );

@@ -9,16 +9,16 @@ const Todos = ({ user, todos }) => {
     <div className={styles.container}>
       <p>
         Welcome {user.name}!{' '}
-        <Link href="/api/auth/logout">
-          Logout
-        </Link>
-      </p>
+        </p>
       {console.log(todos)}
       {todos?.length > 0 ? (
         todos.map((todo) => <p key={todo.id}>{todo.content}</p>)
       ) : (
         <p>You have completed all todos!</p>
       )}
+        <Link href="/api/auth/logout">
+          Logout
+        </Link>
     </div>
   )
 }
