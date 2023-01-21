@@ -8,7 +8,12 @@
 }
 .main h1 {
   margin-bottom: 1em;
-  color: #e37d0f;
+  color: #ed920e;
+}
+.main h2 {
+  margin-bottom: 1em;
+  color: #09403a;
+  text-transform: capitalize;
 }
 
 /* Tablet and Smaller Desktop */

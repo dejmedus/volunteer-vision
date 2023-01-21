@@ -78,13 +78,7 @@ export const Signup = ({ userProfile }) => {
                     : <VolunteerInputs onChange={onChange} />
                 : null
             }
-            {/* <button
-                type="submit"
-                disabled={!formData.name || !formData.about}
-            >
-                save
-            </button> */}
-            <Button type="submit" disabled={!formData.name || !formData.about} variant="contained">Save</Button>
+            <Button className={styles.submitButton} type="submit" disabled={!formData.name || !formData.about} variant="contained">Save</Button>
         </form>
     )
 }

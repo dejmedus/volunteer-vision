@@ -38,13 +38,12 @@ export default function Home({ userProfile }) {
         <div>
           {!userProfile.role
             ? <>
-              <h1>New account form</h1>
+              <h1>Create your account</h1>
               <Signup userProfile={userProfile} />
             </>
             : <>
               <h1>Volunteer Vision</h1>
-              <h1>{userProfile.role}</h1>
-              Welcome {userProfile.name}!{' '}
+              <h2>Welcome {userProfile.name}!</h2>
             </>}
         </div>
       </main>
