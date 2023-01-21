@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../../components/Navbar";
 
 // Post new projects
 export default function all({ userProfile }) {
