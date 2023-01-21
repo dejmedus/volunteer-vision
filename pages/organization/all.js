@@ -18,7 +18,7 @@ export default function all({ userProfile }) {
       <Navbar userProfile={userProfile}/>
       <main className={styles.main}>
         <h1>All Organizations</h1>
-          Welcome {user.name}!{' '}
+          Welcome {userProfile.name}!{' '}
           <Link href="/api/auth/logout">
             Logout
           </Link>
