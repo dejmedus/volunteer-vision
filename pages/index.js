@@ -4,7 +4,7 @@ import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 
 import { Navbar } from "./components/Navbar";
-import { Signup } from "./components/Signup";
+import { Signup } from "./components/Signup/Signup";
 
 export default function Home({ userProfile }) {
   return (
@@ -18,16 +18,18 @@ export default function Home({ userProfile }) {
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
 
-        {!userProfile.role
-          ? <>
-            <h1>New account form</h1>
-            <Signup userProfile={userProfile} />
-          </>
-          : <>
-            <h1>Volunteer Vision</h1>
-            <h1>{userProfile.role}</h1>
-            Welcome {userProfile.name}!{' '}
-          </>}
+        <div>
+          {!userProfile.role
+            ? <>
+              <h1>New account form</h1>
+              <Signup userProfile={userProfile} />
+            </>
+            : <>
+              <h1>Volunteer Vision</h1>
+              <h1>{userProfile.role}</h1>
+              Welcome {userProfile.name}!{' '}
+            </>}
+        </div>
       </main>
     </>
   );
