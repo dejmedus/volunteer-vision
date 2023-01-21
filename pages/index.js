@@ -3,9 +3,10 @@ import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 
-import { Navbar } from "./components/navbar";
+import { Navbar } from "./components/Navbar";
+import { Signup } from "./components/Signup";
 
-export default function Home({ user, isNewUser }) {
+export default function Home({ user }) {
   return (
     <>
       <Head>
@@ -20,10 +21,11 @@ export default function Home({ user, isNewUser }) {
         {!user.role
           ? <>
             <h1>New account form</h1>
-            <p>{user.user_id}</p>
+            <Signup user={user} />
           </>
           : <>
             <h1>Volunteer Vision</h1>
+            <h1>{user.role}</h1>
             Welcome {user.name}!{' '}
           </>}
       </main>
