@@ -1,7 +1,18 @@
-import React from 'react'
+import Link from 'next/link'
 
-export const Navbar = () => {
+export const Navbar = ({ user }) => {
   return (
-    <div>navbar</div>
+    <nav>
+      <ul>
+        <li>
+          {user.name}
+        </li>
+        <li>
+          <Link href="/api/auth/logout">
+            Logout
+          </Link>
+        </li>
+      </ul>
+    </nav>
   )
 }
