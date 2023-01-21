@@ -5,8 +5,61 @@
   text-align: center;
   min-height: 100vh;
   margin: auto;
+  background-color: #FFF7F2;
 }
+
+.all_projects_box > h1 {
+  margin-top: 1rem;
+  font-size: 40px;
+}
+
+/* All_Individual Component */
 
 .all_individual_box {
   border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  background-color: rgb(223, 233, 232);
+  padding: 1rem;
+}
+
+.all_individual_words {
+  text-align: left;
+  justify-content: start;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.all_individual_words > p {
+  margin-top: 1rem;;
+}
+
+/* [project_id].js */
+
+.project_id_box {
+  border: 1px solid black;
+  width: 60vw;
+  background-color: rgb(223, 233, 232);
+}
+
+.project_id_box > h2 {
+  margin: 1rem;
+}
+
+.project_id_box > h3 {
+  margin: 1rem;
+}
+
+.project_id_box > h4 {
+  margin: 1rem;
+}
+
+.project_id_box > p {
+  margin: 1rem;
+}
+
+.project_id_buttons {
+  display: flex;
+  justify-content: space-between;
 }

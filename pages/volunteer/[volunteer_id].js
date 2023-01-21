@@ -4,7 +4,7 @@ import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../../components/navbar";
 
 // Individual project page
 export default function volunteer_id({ user }) {

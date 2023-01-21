@@ -3,8 +3,8 @@ import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
 
-import { Navbar } from "./components/Navbar";
-import { Signup } from "./components/Signup";
+import { Navbar } from "../components/Navbar";
+import { Signup } from "../components/Signup";
 
 export default function Home({ userProfile }) {
   return (

@@ -2,10 +2,13 @@ import Head from "next/head";
 import styles from "@/styles/Project.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { Navbar } from "../components/navbar";
+import { Navbar } from "../../components/Navbar";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/system";
+import Image from "next/image";
+import { Button } from "@mui/material";
+import Link from "next/link";
 
 // Individual project page
 export default function project_id({ userProfile }) {
@@ -24,6 +27,10 @@ export default function project_id({ userProfile }) {
     fetchProject()
   }, [])
 
+  const handleClick = async () => {
+    alert("Applied");
+  }
+
   return (
     <>
       <Head>
@@ -34,9 +41,27 @@ export default function project_id({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        {project != undefined ? <h2>{project.name}</h2>:  null}
-        {project != undefined? <h3>Project ID Number: {project_id}</h3> : null}
-        {project != undefined ? <p>{project.description}</p> : null}
+        {project != undefined ? 
+        <Box className={styles.project_id_box} my={4} px={10} py={2}>
+          <h2>{project.name}</h2>
+          <Image
+            width={400}
+            height={400}
+            src={project.image_url}
+            quality={75}
+            alt="Image"
+            priority
+          />
+          <h3>Project ID Number: {project_id}</h3>
+          <h4>Location: {project.location} || Volunteers Required: {project.volunteers_needed}</h4>
+          <p>Description: {project.description}</p>
+          <Box className={styles.project_id_buttons}>
+             <Link href="/project/all"><Button variant="outlined">Back</Button></Link>
+            <Button variant="contained" onClick={() => handleClick()}>Apply as a Volunteer</Button>
+          </Box>
+        </Box>
+        :
+        null}
       </main>
     </>
   );
