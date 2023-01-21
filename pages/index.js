@@ -2,11 +2,28 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import { Navbar } from "../components/Navbar";
-import { Signup } from "../components/Signup";
+import { Signup } from "../components/Signup/Signup";
+
 
 export default function Home({ userProfile }) {
+  // redirect to org page or all projects upon signin
+  // const router = useRouter();
+  // useEffect(() => {
+
+  //   if (userProfile.role != null) {
+  //     if (userProfile.role == 'org') {
+  //       router.push(`/organization/${userProfile.user_id}`)
+  //     }
+  //     else if (userProfile.role == 'volunteer') {
+  //       router.push('/project/all')
+  //     }
+  //   }
+  // }, []);
+
   return (
     <>
       <Head>
@@ -18,16 +35,17 @@ export default function Home({ userProfile }) {
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
 
-        {!userProfile.role
-          ? <>
-            <h1>New account form</h1>
-            <Signup userProfile={userProfile} />
-          </>
-          : <>
-            <h1>Volunteer Vision</h1>
-            <h1>{userProfile.role}</h1>
-            Welcome {userProfile.name}!{' '}
-          </>}
+        <div>
+          {!userProfile.role
+            ? <>
+              <h1>Create your account</h1>
+              <Signup userProfile={userProfile} />
+            </>
+            : <>
+              <h1>Volunteer Vision</h1>
+              <h2>Welcome {userProfile.name}!</h2>
+            </>}
+        </div>
       </main>
     </>
   );

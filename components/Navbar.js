@@ -9,7 +9,7 @@ export const Navbar = ({ userProfile }) => {
     <div className={styles.navbar}>
       <Box className={styles.logo_box}>
         <Link href="/"><h2 className={styles.logo}>Volunteer Vision</h2></Link>
-        {userProfile != undefined ? <p>Welcome, {userProfile.name}</p> : null}!{" "}
+        {userProfile != undefined && userProfile.name ? <p>Welcome, {userProfile.name}!</p> : null}{" "}
       </Box>
       <Box className={styles.navigation}>
         <Box>

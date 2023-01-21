@@ -1,29 +1,31 @@
 .navbar {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    background-color: #09403A;
-    color: white;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  background-color: #09403a;
+  color: white;
 
-    vertical-align: middle;
-    align-items: center;
-    justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo_box {
-    display: flex;
-    flex-direction: row;
-    margin-left: 10rem;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10rem;
+  align-items: center;
+  text-transform: capitalize;
 }
 
 .logo {
-    margin-right: 4rem;
-    color: #ED920E;
+  margin-right: 4rem;
+  color: #ed920e;
 }
 
 .navigation {
-    display: flex;
-    flex-direction: row;
-    margin-right: 10rem;
+  display: flex;
+  flex-direction: row;
+  margin-right: 10rem;
 }

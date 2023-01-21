@@ -1,9 +1,31 @@
 .main {
-  padding: 4%;
+  padding: 2%;
+  display: grid;
+  place-content: center;
+}
+.main div {
+  min-width: 70vw;
+}
+.main h1 {
+  margin-bottom: 1em;
+  color: #ed920e;
+}
+.main h2 {
+  margin-bottom: 1em;
+  color: #09403a;
+  text-transform: capitalize;
 }
 
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
+  .main div {
+    min-width: 80vw;
+  }
+}
+@media (max-width: 700px) {
+  .main div {
+    min-width: 90vw;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

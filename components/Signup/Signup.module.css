@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 900px;
+}
+.submitButton {
+  max-width: 200px;
+  padding: 1em 2em;
+  background-color: #0c322c;
+}
