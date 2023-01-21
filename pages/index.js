@@ -2,10 +2,11 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
-import Link from "next/link";
-import { Navbar } from "./components/navbar";
 
-export default function Home({ user }) {
+import { Navbar } from "./components/Navbar";
+import { Signup } from "./components/Signup";
+
+export default function Home({ userProfile }) {
   return (
     <>
       <Head>
@@ -14,16 +15,45 @@ export default function Home({ user }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        <h1>Volunteer Vision</h1>
-          Welcome {user.name}!{' '}
-          <Link href="/api/auth/logout">
-            Logout
-          </Link>
+
+        {!userProfile.role
+          ? <>
+            <h1>New account form</h1>
+            <Signup userProfile={userProfile} />
+          </>
+          : <>
+            <h1>Volunteer Vision</h1>
+            <h1>{userProfile.role}</h1>
+            Welcome {userProfile.name}!{' '}
+          </>}
       </main>
     </>
   );
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps({ req, res }) {
+    const {
+      user: { accessToken, sub },
+    } = await getSession(req, res)
+
+    const supabase = getSupabase(accessToken)
+    let userProfile = null;
+
+    try {
+      // if no user has user_id of sub, create new user
+      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+
+      userProfile = data[0];
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+
+    return {
+      props: { userProfile },
+    }
+  },
+});
