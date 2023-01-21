@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import { getSupabase } from "../../utils/supabase";
 
-export const Signup = ({ user }) => {
-    const [formData, setFormData] = useState(user);
+export const Signup = ({ userProfile }) => {
+    const [formData, setFormData] = useState(userProfile);
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -36,9 +36,8 @@ export const Signup = ({ user }) => {
                 about: about,
                 role: role,
                 website: website
-            }).eq('user_id', user.user_id)
+            }).eq('user_id', userProfile.user_id)
 
-            console.log(response)
         }
         catch (e) {
             console.error(e.message)

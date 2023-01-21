@@ -6,7 +6,7 @@ import { getSupabase } from "../utils/supabase";
 import { Navbar } from "./components/Navbar";
 import { Signup } from "./components/Signup";
 
-export default function Home({ user }) {
+export default function Home({ userProfile }) {
   return (
     <>
       <Head>
@@ -15,18 +15,18 @@ export default function Home({ user }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar user={user} />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
 
-        {!user.role
+        {!userProfile.role
           ? <>
             <h1>New account form</h1>
-            <Signup user={user} />
+            <Signup userProfile={userProfile} />
           </>
           : <>
             <h1>Volunteer Vision</h1>
-            <h1>{user.role}</h1>
-            Welcome {user.name}!{' '}
+            <h1>{userProfile.role}</h1>
+            Welcome {userProfile.name}!{' '}
           </>}
       </main>
     </>
@@ -40,19 +40,20 @@ export const getServerSideProps = withPageAuthRequired({
     } = await getSession(req, res)
 
     const supabase = getSupabase(accessToken)
-    let user = null;
+    let userProfile = null;
 
     try {
       // if no user has user_id of sub, create new user
       const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
-      user = data[0];
+
+      userProfile = data[0];
     }
     catch (e) {
       console.error(e.message)
     }
 
     return {
-      props: { user },
+      props: { userProfile },
     }
   },
 });
