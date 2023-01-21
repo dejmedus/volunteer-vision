@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { Navbar } from "../components/navbar";
 
 // Individual organization page
-export default function organization_id({ user }) {
+export default function organization_id({ userProfile }) {
   const router = useRouter()
   const { organization_id } = router.query
 
@@ -19,10 +19,10 @@ export default function organization_id({ user }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         <h1>Project {organization_id}</h1>
-          Welcome {user.name}!{' '}
+          Welcome {userProfile.name}!{' '}
           <Link href="/api/auth/logout">
             Logout
           </Link>
@@ -31,4 +31,27 @@ export default function organization_id({ user }) {
   );
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps({ req, res }) {
+    const {
+      user: { accessToken, sub },
+    } = await getSession(req, res)
+
+    const supabase = getSupabase(accessToken)
+    let userProfile = null;
+
+    try {
+      // if no user has user_id of sub, create new user
+      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+
+      userProfile = data[0];
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+
+    return {
+      props: { userProfile },
+    }
+  },
+});

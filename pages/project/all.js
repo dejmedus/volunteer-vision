@@ -9,7 +9,7 @@ import { Stack } from "@mui/system";
 import All_Individual from "../components/Project/All_Individual";
 
 // All projects
-const all = ({ user, projects }) => {
+const all = ({ userProfile, projects }) => {
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ const all = ({ user, projects }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         <h1>All Projects</h1>
         <Box className={styles.all_projects_box}>
@@ -45,15 +45,26 @@ const all = ({ user, projects }) => {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps({ req, res }) {
     const {
-      user: { accessToken },
+      user: { accessToken, sub },
     } = await getSession(req, res);
 
     const supabase = getSupabase(accessToken);
+    let userProfile = null;
 
     const { data: projects } = await supabase.from('project').select('*');
+    
+    try {
+      // if no user has user_id of sub, create new user
+      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+
+      userProfile = data[0];
+    }
+    catch (e) {
+      console.error(e.message)
+    }
 
     return {
-      props: { projects },
+      props: { projects, userProfile },
     };
   },
 });

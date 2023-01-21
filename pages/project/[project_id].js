@@ -8,12 +8,12 @@ import { Navbar } from "../components/navbar";
 import { useEffect, useState } from "react";
 
 // Individual project page
-export default function project_id({ user }) {
+export default function project_id({ userProfile }) {
   const router = useRouter()
   const { project_id } = router.query
 
   const [project, setProject] = useState([])
-  const supabase = getSupabase(user.accessToken)
+  const supabase = getSupabase(userProfile.accessToken)
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -32,7 +32,7 @@ export default function project_id({ user }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         {project != undefined ? <h2>{project.name}</h2>:  null}
         {project != undefined? <h3>Project ID Number: {project_id}</h3> : null}
@@ -42,4 +42,27 @@ export default function project_id({ user }) {
   );
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps({ req, res }) {
+    const {
+      user: { accessToken, sub },
+    } = await getSession(req, res)
+
+    const supabase = getSupabase(accessToken)
+    let userProfile = null;
+
+    try {
+      // if no user has user_id of sub, create new user
+      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+
+      userProfile = data[0];
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+
+    return {
+      props: { userProfile },
+    }
+  },
+});

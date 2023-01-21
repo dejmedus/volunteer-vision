@@ -9,7 +9,7 @@ export const Navbar = ({ userProfile }) => {
     <div className={styles.navbar}>
       <Link href="/"><Box className={styles.logo}><p>Volunteer Vision</p></Box></Link>
       <Box className={styles.navigation}>
-        <Box>Welcome {userProfile.name != undefined ? userProfile.name : null}!{" "}</Box>
+        <Box>Welcome {userProfile != undefined ? userProfile.name : null}!{" "}</Box>
         <Box>
           <Link href="/api/auth/logout"><Button variant="contained">Log Out</Button></Link>
         </Box>
@@ -17,4 +17,3 @@ export const Navbar = ({ userProfile }) => {
     </div>
   );
 };
-

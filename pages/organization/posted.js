@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Navbar } from "../components/navbar";
 
 // Posted Project from a Organization
-export default function all({ user }) {
+export default function all({ userProfile }) {
   return (
     <>
       <Head>
@@ -15,10 +15,10 @@ export default function all({ user }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         <h1>Posted Projects</h1>
-          Welcome {user.name}!{' '}
+          Welcome {userProfile.name}!{' '}
           <Link href="/api/auth/logout">
             Logout
           </Link>
@@ -27,4 +27,27 @@ export default function all({ user }) {
   );
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps({ req, res }) {
+    const {
+      user: { accessToken, sub },
+    } = await getSession(req, res)
+
+    const supabase = getSupabase(accessToken)
+    let userProfile = null;
+
+    try {
+      // if no user has user_id of sub, create new user
+      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+
+      userProfile = data[0];
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+
+    return {
+      props: { userProfile },
+    }
+  },
+});
