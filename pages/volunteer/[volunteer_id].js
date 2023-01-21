@@ -1,11 +1,16 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import { getSupabase } from "../utils/supabase";
+import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
-import { Navbar } from "./components/navbar";
+import { useRouter } from "next/router";
+import { Navbar } from "../components/navbar";
 
-export default function Home({ user }) {
+// Individual project page
+export default function volunteer_id({ user }) {
+  const router = useRouter()
+  const { project_id } = router.query
+
   return (
     <>
       <Head>
@@ -16,7 +21,7 @@ export default function Home({ user }) {
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <h1>Volunteer Vision</h1>
+        <h1>Project {volunteer_id}</h1>
           Welcome {user.name}!{' '}
           <Link href="/api/auth/logout">
             Logout
