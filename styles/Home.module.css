@@ -16,6 +16,21 @@
   text-transform: capitalize;
 }
 
+/* [volunteer_id].js */
+
+.volunteer_id_about > h3 {
+  margin-top: 1rem;
+}
+
+.volunteer_id_about > h4 {
+  margin-top: 1rem;
+}
+
+.volunteer_id_events > h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .main div {
