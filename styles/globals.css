@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Noto+Sans&family=Roboto:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Noto+Sans&family=Roboto:wght@500&display=swap");
 
 :root {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,13 +22,7 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #fff7f2;
 }
 
 a {
