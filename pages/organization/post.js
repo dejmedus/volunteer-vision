@@ -17,7 +17,7 @@ import {
 import project_id from '../project/[project_id]';
 
 // Post new projects
-export default function all({ userProfile }) {
+export default function All({ userProfile }) {
   const [projectForm, setProjectForm] = useState({
     title: '',
     location: '',
