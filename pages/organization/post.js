@@ -1,5 +1,4 @@
 import Head from 'next/head';
-// import styles from '@/styles/Home.module.css';
 import styles from '@/styles/Organization.module.css';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import { getSupabase } from '../../utils/supabase';
