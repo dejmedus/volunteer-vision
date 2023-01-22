@@ -25,6 +25,7 @@ export default function all({ userProfile }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log('projectForm', projectForm);
   };
 
   const handleChange = (event) => {
