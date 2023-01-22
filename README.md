@@ -1,5 +1,9 @@
 # Volunteer Vision
 
+Volunteer Vision was built in a weekend for [Major League Hacking's](https://mlh.io) CivicHacks Hackathon. 
+
+*🎉 Awarded First Overall!*
+
 ## Inspiration
 
 Volunteer Vision was created to inspire individuals to make a positive impact on their community through volunteerism. We believe that every person has the potential to make a difference. By connecting volunteers with local non-profit organizations we can make the process of volunteerism more efficient and effective. This is a project that has the potential to greatly help the local residents and community.
