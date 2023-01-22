@@ -4,9 +4,11 @@ import { getSupabase } from "../../utils/supabase";
 
 import { ToggleButtonGroup, ToggleButton, TextField, Button } from "@mui/material";
 import styles from './Signup.module.css'
+import { useRouter } from 'next/router';
 
 export const Signup = ({ userProfile }) => {
     const [formData, setFormData] = useState(userProfile);
+    const router = useRouter();
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -33,14 +35,12 @@ export const Signup = ({ userProfile }) => {
 
         const supabase = getSupabase();
         try {
-
             const response = await supabase.from('user').update({
                 name: name,
                 about: about,
                 role: role,
                 website: website
             }).eq('user_id', userProfile.user_id)
-
         }
         catch (e) {
             console.error(e.message)
