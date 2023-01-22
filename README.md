@@ -12,17 +12,18 @@ Through our user-friendly interface, volunteers can easily create profiles, sear
 
 To create this project, we used a combination of **Next.js/React, JavaScript, HTML, and CSS, Supabase, Twilio, Auth0, and Wix.** 
 
-Wix was used to create the user-friendly landing page and provided a mobile-responsive interface that is easy to navigate and understand. The Wix landing page contains information such as About and FAQ, which allows users to read more about the purpose of this website. When they are prompted to log-in, they are redirected to our Next.js/React website.
+Wix was used to create the user-friendly landing page and provided a mobile-responsive interface that is easy to navigate and understand. The Wix landing page contains information such as About and FAQs, which allows users to read more about the purpose of this website. When they are prompted to log-in, they are redirected to our Next.js/React website.
 
-React allowed us to create reusable components, making the development process more efficient. Next.js helped us to build server-rendered React applications, ensuring a seamless experience for our users. CSS allowed us to add visual design to our project, making it visually pleasing and easy to use
+React allowed us to create reusable components, making the development process more efficient. Next.js helped us to build server-rendered React applications, ensuring a seamless experience for our users. CSS allowed us to add visual design to our project, making it visually pleasing and easy to use.
 
 Together, Twilio and Auth0 make our login flow modern, secure, and easy to use. Auth0 handles all out user management, while Twilio passwordless SMS means users don't need to worry about password security.
 
 The Supabase database pulls everything together and persists user data throughout the platform.
 
+<img src="http://g.recordit.co/BFtoFSoOwU.gif" width=200><br>
 
 ## Challenges we ran into
-Creating this project was challenging. One of the main challenges we ran into was the integration of different technologies. While powerful tools, JavaScript, WIX, React, Next.js, and CSS, required careful coordination to ensure they worked seamlessly together. This required a lot of testing and troubleshooting to ensure everything ran smoothly. Another challenge was creating a user-friendly interface that was easy to navigate and understand. WIX made it easy to create a visually pleasing interface, but we had to ensure that it was intuitive and easy to use. This required a lot of user testing and feedback to ensure the interface was user-friendly. Another challenge we encountered was creating an accurate and reliable tracking feature. This required a lot of testing and fine-tuning to ensure that the data was being tracked and recorded correctly. 
+Creating this project was challenging. One of the main challenges we ran into was the integration of different technologies. While powerful tools, JavaScript, WIX, React, Next.js, and CSS, required careful coordination to ensure they worked seamlessly together. This required a lot of testing and troubleshooting to ensure everything ran smoothly. Another challenge was creating a user-friendly interface that was easy to navigate and understand. WIX made it easy to create a visually pleasing interface, but we had to ensure that it was intuitive and easy to use. Another challenge we encountered was creating an accurate and reliable tracking feature. This required a lot of testing and fine-tuning to ensure that the data was being tracked and recorded correctly. 
 
 Despite these challenges, we overcame them and delivered a platform that connects volunteers with local non-profit organizations.
 
