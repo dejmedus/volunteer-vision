@@ -1,11 +1,14 @@
 import Head from "next/head";
 import styles from "@/styles/Organization.module.css";
+import projectStyles from "@/styles/Project.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Navbar } from "../../components/Navbar";
 import Link from 'next/link';
+import { Box } from '@mui/system';
+import Image from "next/image";
 
 // Individual organization page
 export default function organization_id({ userProfile }) {
@@ -24,14 +27,17 @@ export default function organization_id({ userProfile }) {
     }
 
     const fetchProjects = async () => {
-      const { data } = await supabase.from('').select('*').eq('user_id', organization_id);
+      const { data } = await supabase.from('project').select('*').eq('user_id', organization_id);
       console.log(data)
       setProjects(data)
     }
 
     fetchOrg()
-    // fetchProjects()
+    fetchProjects()
   }, [])
+
+
+  // console.log(projects.length)
 
   return (
 
@@ -51,8 +57,10 @@ export default function organization_id({ userProfile }) {
             <Link href={encodeURI(org.website)}>Vist the org.name website!</Link>
             <div>
               <h3>{`View ${org.name}'s current Projects`}</h3>
-              {projects != undefined
-                ? <p>projects mapped over</p>
+              {projects?.length > 0
+                ? projects.map(project => {
+                  <ProjectCard urlString={`/project/${project.project_id}`} image_url={project.image_url} name={project.name} location={project.location} />
+                })
                 : null
               }
             </div>
@@ -88,3 +96,23 @@ export const getServerSideProps = withPageAuthRequired({
     }
   },
 });
+
+function ProjectCard({ urlString, image_url, name, location }) {
+  return (
+    <Link href={urlString}>
+      <Box className={projectStyles.all_individual_box}>
+        <Image
+          width={75}
+          height={75}
+          src={image_url}
+          quality={75}
+          alt="Project Image"
+        />
+        <Box className={projectStyles.all_individual_words}>
+          <h2>{name}</h2>
+          <h4>{location}</h4>
+        </Box>
+      </Box>
+    </Link>
+  )
+}
