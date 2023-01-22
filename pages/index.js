@@ -1,27 +1,19 @@
-import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
-import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-import { getSupabase } from '../utils/supabase';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Head from "next/head";
+import styles from "@/styles/Home.module.css";
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import { getSupabase } from "../utils/supabase";
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
+import { Navbar } from "../components/Navbar";
+import { Signup } from "../components/Signup/Signup";
+import Image from "next/image";
+import { Box } from "@mui/system";
 
 import { Navbar } from '../components/Navbar';
 import { Signup } from '../components/Signup/Signup';
 
 export default function Home({ userProfile }) {
-  // redirect to org page or all projects upon signin
-  // const router = useRouter();
-  // useEffect(() => {
-
-  //   if (userProfile.role != null) {
-  //     if (userProfile.role == 'org') {
-  //       router.push(`/organization/${userProfile.user_id}`)
-  //     }
-  //     else if (userProfile.role == 'volunteer') {
-  //       router.push('/project/all')
-  //     }
-  //   }
-  // }, []);
 
   return (
     <>
@@ -33,20 +25,25 @@ export default function Home({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        <div>
-          {!userProfile.role ? (
-            <>
+        <Image
+          width={700}
+          height={450}
+          src="/integration.jpg"
+          quality={75}
+          priority
+        />
+        <Box my={2}>
+          {!userProfile.role
+            ? <>
               <h1>Create your account</h1>
               <Signup userProfile={userProfile} />
             </>
           ) : (
             <>
               <h1>Volunteer Vision</h1>
-              <h2>Welcome {userProfile.name}!</h2>
-              <img src='./img/volunteer-hands.png' />
-            </>
-          )}
-        </div>
+              <h2>Welcome, {userProfile.name}!</h2>
+            </>}
+        </Box>
       </main>
     </>
   );

@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  height: 60px;
+  height: 95px;
   display: flex;
   flex-direction: row;
   background-color: #09403a;
@@ -17,11 +17,13 @@
   margin-left: 10rem;
   align-items: center;
   text-transform: capitalize;
+  color: #ED920E;
+  font-size: 20px;
+  font-weight: 350;
 }
 
 .logo {
-  margin-right: 4rem;
-  color: #ed920e;
+  margin-right: 6rem;
 }
 
 .navigation {
