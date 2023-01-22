@@ -16,7 +16,7 @@ export default function all({ orgs, userProfile }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar userProfile={userProfile} />
-      <main className={styles.main}>
+      <main className={styles.orgMain}>
         <h1>All Organizations</h1>
         {orgs?.length > 0 ? (
           orgs.map((org) => (
