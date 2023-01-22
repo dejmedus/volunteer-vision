@@ -63,7 +63,10 @@ export default function project_id({ userProfile }) {
             <p>Description: {project.description}</p>
             <Box className={styles.project_id_buttons}>
               <Link href="/project/all"><Button variant="outlined">Back</Button></Link>
-              <Button variant="contained" onClick={() => handleClick()}>Apply as a Volunteer</Button>
+              {userProfile.role !== 'org'
+                ? <Button variant="contained" onClick={() => handleClick()}>Apply as a Volunteer</Button>
+                : null
+              }
             </Box>
           </Box>
           :

@@ -12,7 +12,8 @@ export default function organization_id({ userProfile }) {
   const router = useRouter()
   const { organization_id } = router.query
 
-  const [org, setOrg] = useState([])
+  const [org, setOrg] = useState([]);
+  const [projects, setProjects] = useState([]);
   const supabase = getSupabase()
 
   useEffect(() => {
@@ -22,7 +23,14 @@ export default function organization_id({ userProfile }) {
       console.log(data[0]);
     }
 
+    const fetchProjects = async () => {
+      const { data } = await supabase.from('').select('*').eq('user_id', organization_id);
+      console.log(data)
+      setProjects(data)
+    }
+
     fetchOrg()
+    // fetchProjects()
   }, [])
 
   return (
@@ -41,6 +49,13 @@ export default function organization_id({ userProfile }) {
             <h1>{org.name}</h1>
             <p>{org.about}</p>
             <Link href={encodeURI(org.website)}>Vist the org.name website!</Link>
+            <div>
+              <h3>{`View ${org.name}'s current Projects`}</h3>
+              {projects != undefined
+                ? <p>projects mapped over</p>
+                : null
+              }
+            </div>
           </>
           : null
         }
