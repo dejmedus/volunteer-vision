@@ -14,25 +14,42 @@ export default function Volunteer_Id({ user, userProfile }) {
   const router = useRouter()
   const { volunteer_id } = router.query
 
-  const [volunteer, setVolunteer] = useState([])
-  const [projects, setProjects] = useState()
-  const supabase = getSupabase(userProfile.accessToken)
+  const [volunteer, setVolunteer] = useState([]);
+  const [projects, setProjects] = useState();
+  const [totalHours, setTotalHours] = useState(0);
+  const [isUser, setIsUser] = useState(false);
+  const supabase = getSupabase(userProfile.accessToken);
 
   useEffect(() => {
     const fetchVolunteer = async () => {
-      const { data } = await supabase.from('user').select('*').eq('id', volunteer_id)
-      setVolunteer(data[0])
-    }
+      const { data } = await supabase
+        .from("user")
+        .select("*")
+        .eq("id", volunteer_id);
+      setVolunteer(data[0]);
+    };
 
     const fetchProjects = async () => {
-      const { data } = await supabase.from('applicants').select('*').eq('user_id', volunteer_id)
-      console.log(data)
-      setProjects(data)
+      const { data } = await supabase
+        .from("applicants")
+        .select("*")
+        .eq("user_id", volunteer_id);
+      setProjects(data);
+    };
+
+    const fetchHours = async () => {
+      const { data } = await supabase.rpc('get_volunteer_hours', {volunteer_id});
+      setTotalHours(data)
     }
 
-    fetchProjects();
+    if (volunteer_id == userProfile?.id) {
+      setIsUser(true);
+    }
+
     fetchVolunteer();
-  }, [])
+    fetchProjects();
+    fetchHours();
+  }, []);
 
   return (
     <>
@@ -46,29 +63,35 @@ export default function Volunteer_Id({ user, userProfile }) {
       <main className={styles.main}>
         <Box>
           <h1>Volunteer ID: {volunteer_id}</h1>
-          {volunteer != undefined ?
+          {volunteer != undefined ? (
             <Box>
               <Box className={styles.volunteer_id_about}>
-                <h3>Name: {volunteer.name}</h3>
+                <h2>Name: {volunteer.name}</h2>
                 <h4>About: {volunteer.about}</h4>
               </Box>
               <Box className={styles.volunteer_id_events}>
-                <h3>I am volunteering at the following events:</h3>
+                <h4>I am volunteering at the following events:</h4>
                 <Stack spacing={1}>
-                  {projects?.length > 0 ? projects.map((project, item) => (
-
-                    <Profile_Individual
-                      key={item}
-                      project_id={project.project_id}
-                      userProfile={userProfile}
-                    />
-
-                  )) : <h4>None</h4>}
+                  {projects?.length > 0 ? (
+                    projects.map((project, item) => (
+                      <Profile_Individual
+                        key={item}
+                        project_id={project.project_id}
+                        userProfile={userProfile}
+                        hours={project.hours}
+                        canDelete={isUser}
+                      />
+                    ))
+                  ) : (
+                    <h4>None</h4>
+                  )}
                 </Stack>
+                <h4>Total Hours: {totalHours}</h4>
               </Box>
-            </Box> :
+            </Box>
+          ) : (
             <h3>No volunteer for this ID was found...</h3>
-          }
+          )}
         </Box>
       </main>
     </>
@@ -84,16 +107,18 @@ export const getServerSideProps = withPageAuthRequired({
     const supabase = getSupabase(accessToken);
     let userProfile = null;
 
-    const { data: projects } = await supabase.from('project').select('*');
+    const { data: projects } = await supabase.from("project").select("*");
 
     try {
       // if no user has user_id of sub, create new user
-      const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
+      const { data } = await supabase
+        .from("user")
+        .upsert({ user_id: sub }, { onConflict: "user_id" })
+        .select();
 
       userProfile = data[0];
-    }
-    catch (e) {
-      console.error(e.message)
+    } catch (e) {
+      console.error(e.message);
     }
 
     return {

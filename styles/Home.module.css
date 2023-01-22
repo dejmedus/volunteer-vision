@@ -24,10 +24,11 @@
 
 .volunteer_id_about > h4 {
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.volunteer_id_events > h3 {
-  margin-top: 2rem;
+.volunteer_id_events > h4 {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
