@@ -52,7 +52,7 @@ export default function Organization_Id({ userProfile }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar userProfile={userProfile} />
-      <main className={styles.main}>
+      <main className={styles.orgMain}>
 
         {org != undefined
           ? <>
