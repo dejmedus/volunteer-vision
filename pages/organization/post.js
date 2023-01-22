@@ -95,7 +95,7 @@ export default function All({ userProfile }) {
                 required
               />
             </FormControl>
-            <FormControl className={styles.post_form_line}>
+            <FormControl className={styles.post_form_textfield}>
               <TextField
                 placeholder='About your project'
                 value={projectForm.about}
