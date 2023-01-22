@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 
 // Individual project page
-export default function project_id({ userProfile }) {
+export default function Project_Id({ userProfile }) {
   const router = useRouter()
   const { project_id } = router.query
 

@@ -10,9 +10,9 @@ import Profile_Individual from "@/components/Project/Profile_Individual";
 import { Stack } from "@mui/material";
 
 // Individual project page
-export default function volunteer_id({ user, userProfile }) {
-  const router = useRouter();
-  const { volunteer_id } = router.query;
+export default function Volunteer_Id({ user, userProfile }) {
+  const router = useRouter()
+  const { volunteer_id } = router.query
 
   const [volunteer, setVolunteer] = useState([]);
   const [projects, setProjects] = useState();
