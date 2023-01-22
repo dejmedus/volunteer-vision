@@ -35,6 +35,23 @@
   margin-top: 1rem;;
 }
 
+.profile_individual_words {
+  text-align: left;
+  justify-content: start;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.profile_individual_words > p {
+  margin-bottom: 1rem;
+}
+
+.profile_individual_delete {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 400;
+}
+
 /* [project_id].js */
 
 .project_id_box {
