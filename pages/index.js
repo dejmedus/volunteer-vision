@@ -7,22 +7,11 @@ import { useEffect } from 'react'
 
 import { Navbar } from "../components/Navbar";
 import { Signup } from "../components/Signup/Signup";
+import Image from "next/image";
+import { Box } from "@mui/system";
 
 
 export default function Home({ userProfile }) {
-  // redirect to org page or all projects upon signin
-  // const router = useRouter();
-  // useEffect(() => {
-
-  //   if (userProfile.role != null) {
-  //     if (userProfile.role == 'org') {
-  //       router.push(`/organization/${userProfile.user_id}`)
-  //     }
-  //     else if (userProfile.role == 'volunteer') {
-  //       router.push('/project/all')
-  //     }
-  //   }
-  // }, []);
 
   return (
     <>
@@ -34,8 +23,14 @@ export default function Home({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-
-        <div>
+        <Image
+          width={700}
+          height={450}
+          src="/integration.jpg"
+          quality={75}
+          priority
+        />
+        <Box my={2}>
           {!userProfile.role
             ? <>
               <h1>Create your account</h1>
@@ -43,9 +38,9 @@ export default function Home({ userProfile }) {
             </>
             : <>
               <h1>Volunteer Vision</h1>
-              <h2>Welcome {userProfile.name}!</h2>
+              <h2>Welcome, {userProfile.name}!</h2>
             </>}
-        </div>
+        </Box>
       </main>
     </>
   );
