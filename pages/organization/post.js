@@ -14,18 +14,46 @@ import {
   Box,
   Button,
 } from '@mui/material';
+import project_id from '../project/[project_id]';
 
 // Post new projects
 export default function all({ userProfile }) {
   const [projectForm, setProjectForm] = useState({
     title: '',
     location: '',
+    image: '',
+    volunteers: 0,
     about: '',
   });
+
+  const supabase = getSupabase();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('projectForm', projectForm);
+
+    const sendFormData = async () => {
+      const { error } = await supabase.from('project').insert({
+        name: projectForm.title,
+        description: projectForm.about,
+        location: projectForm.location,
+        volunteers_needed: projectForm.volunteers,
+        image_url: projectForm.image,
+        user_id: null,
+      });
+
+      console.log('error', error);
+    };
+
+    sendFormData();
+
+    setProjectForm({
+      title: '',
+      location: '',
+      image: '',
+      volunteers: 0,
+      about: '',
+    });
   };
 
   const handleChange = (event) => {
@@ -55,6 +83,7 @@ export default function all({ userProfile }) {
                 value={projectForm.title}
                 name='title'
                 onChange={handleChange}
+                required
               />
             </FormControl>
             <FormControl className={styles.post_form_line}>
@@ -63,17 +92,49 @@ export default function all({ userProfile }) {
                 value={projectForm.location}
                 name='location'
                 onChange={handleChange}
+                required
               />
             </FormControl>
-            <FormControl className={styles.post_form_textfield}>
+            <FormControl className={styles.post_form_line}>
               <TextField
                 placeholder='About your project'
                 value={projectForm.about}
                 name='about'
                 onChange={handleChange}
+                required
               />
             </FormControl>
-            <Button type='submit' variant='contained' onClick={handleSubmit}>
+            <FormControl className={styles.post_form_line}>
+              <InputLabel>Project Image Link</InputLabel>
+              <Input
+                value={projectForm.image}
+                name='image'
+                onChange={handleChange}
+                required
+              />
+            </FormControl>
+            <FormControl className={styles.post_form_line}>
+              <InputLabel>Number of volunteers needed</InputLabel>
+              <Input
+                type='number'
+                value={projectForm.volunteers}
+                name='volunteers'
+                onChange={handleChange}
+                required
+              />
+            </FormControl>
+            <Button
+              type='submit'
+              variant='contained'
+              onClick={handleSubmit}
+              disabled={
+                !projectForm.title ||
+                !projectForm.location ||
+                !projectForm.image ||
+                !projectForm.volunteers ||
+                !projectForm.about
+              }
+            >
               Submit
             </Button>
           </FormGroup>
