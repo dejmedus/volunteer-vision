@@ -4,6 +4,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import { getSupabase } from '../../utils/supabase';
 import Link from 'next/link';
 import { Navbar } from '../../components/Navbar';
+import { useState } from 'react';
 import {
   FormGroup,
   FormControl,
@@ -11,10 +12,30 @@ import {
   Input,
   TextField,
   Box,
+  Button,
 } from '@mui/material';
 
 // Post new projects
 export default function all({ userProfile }) {
+  const [projectForm, setProjectForm] = useState({
+    title: '',
+    location: '',
+    about: '',
+  });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const handleChange = (event) => {
+    setProjectForm((prevProjectForm) => {
+      return {
+        ...projectForm,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+
   return (
     <>
       <Head>
@@ -29,15 +50,31 @@ export default function all({ userProfile }) {
           <FormGroup className={styles.post_form_style}>
             <FormControl className={styles.post_form_line}>
               <InputLabel>Project Name</InputLabel>
-              <Input />
+              <Input
+                value={projectForm.title}
+                name='title'
+                onChange={handleChange}
+              />
             </FormControl>
             <FormControl className={styles.post_form_line}>
               <InputLabel>Location</InputLabel>
-              <Input />
+              <Input
+                value={projectForm.location}
+                name='location'
+                onChange={handleChange}
+              />
             </FormControl>
-            <FormControl className={styles.post_form_line}>
-              <TextField placeholder='About your project' />
+            <FormControl className={styles.post_form_textfield}>
+              <TextField
+                placeholder='About your project'
+                value={projectForm.about}
+                name='about'
+                onChange={handleChange}
+              />
             </FormControl>
+            <Button type='submit' variant='contained' onClick={handleSubmit}>
+              Submit
+            </Button>
           </FormGroup>
         </Box>
       </main>
