@@ -53,3 +53,17 @@ Although some of the team has used Next.js/React before, this project allowed ev
 ## What's next for Volunteer Vision
 
 A fully functional mobile app would be our next move - although the Wix application works for every device, the Next.js web application should be optimized for mobile devices. An app would help connect even more people to great causes. We would also like to add a feedback system that allows volunteers and organizations to discuss their experiences and hopefully encourage more people to generously offer their time and skills.
+
+## Screenshots
+
+<img src="./screenshot/1_Homepage.png" width="400">
+<img src="./screenshot/2_About.png" width="400">
+<img src="./screenshot/3_FAQs.png" width="400">
+<img src="./screenshot/4_Login.png" width="400">
+<img src="./screenshot/5_Welcome.png" width="400">
+<img src="./screenshot/6_Volunteer_Profile.png" width="400">
+<img src="./screenshot/7_All_Projects.png" width="400">
+<img src="./screenshot/8_Project_Page.png" width="400">
+<img src="./screenshot/9_All_Organizations.png" width="400">
+<img src="./screenshot/10_Organization_Profile.png" width="400">
+<img src="./screenshot/11_Add_Project.png" width="400">
