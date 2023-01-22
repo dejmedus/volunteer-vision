@@ -1,12 +1,23 @@
 /* [organization_id] */
 .orgMain {
-  padding: 4%;
-  display: grid;
-  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  margin: auto;
+  background-color: #FFF7F2;
 }
+
+.orgMain > h1 {
+  font-size: 40px;
+  margin-top: 1rem;
+}
+
 .orgMain svg:hover {
   opacity: 60%;
 }
+
 .projects {
   min-height: 30vh;
   display: grid;
@@ -14,15 +25,18 @@
   gap: 1em;
   padding: 1em 2em 2em 2em;
 }
+
 .projectsEmpty {
-  border: 1px dashed sandybrown;
+  border: 1px dashed rgb(212, 162, 119);
   border-radius: 6px;
-  min-height: 40vh;
+  min-height: 30vh;
   display: grid;
   align-items: center;
   justify-content: center;
   margin: 2em 0;
+  padding: 2rem;
 }
+
 .backButton {
   max-width: 200px;
   background-color: #0c322c;
@@ -34,14 +48,17 @@
   background-color: rgba(244, 165, 96, 0.055);
   border-radius: 2px;
   padding: 2em;
-  max-width: 70vw;
+  width: 60vw;
 }
+
 .orgCard:hover {
   background-color: rgba(244, 165, 96, 0.096);
 }
+
 .orgCard h2 {
   color: #0c322c;
 }
+
 .orgCard p {
   padding: 1em 0;
 }
