@@ -4,6 +4,7 @@ import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
 import { Navbar } from "../../components/Navbar";
+import { Stack } from "@mui/material";
 
 // All organizations
 export default function all({ orgs, userProfile }) {
@@ -18,6 +19,7 @@ export default function all({ orgs, userProfile }) {
       <Navbar userProfile={userProfile} />
       <main className={styles.orgMain}>
         <h1>All Organizations</h1>
+        <Stack spacing={2} my={2}>
         {orgs?.length > 0 ? (
           orgs.map((org) => (
             <Org key={org.id} name={org.name} about={org.about} id={org.id} />
@@ -25,6 +27,7 @@ export default function all({ orgs, userProfile }) {
         ) : (
           <p>No Organizations Available...</p>
         )}
+        </Stack>
       </main>
     </>
   );

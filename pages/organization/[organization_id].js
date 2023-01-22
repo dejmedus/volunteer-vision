@@ -65,7 +65,7 @@ export default function Organization_Id({ userProfile }) {
                 })}
               </div>
               : <div className={styles.projectsEmpty}>
-                <h3>{`${org.name} will need volunteers soon.`}</h3>
+                <h3>{`${org.name} has no projects yet`}</h3>
               </div>
             }
           </>
