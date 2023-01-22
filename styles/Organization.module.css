@@ -1,0 +1,28 @@
+.main {
+  padding: 4%;
+  display: grid;
+  gap: 1em;
+}
+.main svg:hover {
+  opacity: 60%;
+}
+.projects {
+  min-height: 30vh;
+  display: grid;
+  justify-content: center;
+  gap: 1em;
+  padding: 1em 2em 2em 2em;
+}
+.projectsEmpty {
+  border: 1px dashed sandybrown;
+  border-radius: 6px;
+  min-height: 40vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 2em 0;
+}
+.backButton {
+  max-width: 200px;
+  background-color: #0c322c;
+}

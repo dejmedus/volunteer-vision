@@ -9,6 +9,7 @@ import { Navbar } from "../../components/Navbar";
 import Link from 'next/link';
 import { Box } from '@mui/system';
 import Image from "next/image";
+import { Button } from "@mui/material";
 
 // Individual organization page
 export default function Organization_Id({ userProfile }) {
@@ -49,27 +50,28 @@ export default function Organization_Id({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
+
         {org != undefined
           ? <>
-            <h1>{org.name}</h1>
+            <h1>{org.name}{" "}<Link href={encodeURI(org.website)}><LinkSVG /></Link></h1>
             <p>{org.about}</p>
-            <Link href={encodeURI(org.website)}>Vist the org.name website!</Link>
-            <div>
-
-              {projects?.length > 0
-                ? <>
-                  <h3>{`View ${org.name}'s current Projects`}</h3>
-                  {projects.map(project => {
-                    return <ProjectCard key={project.id} description={project.description} urlString={`/project/${project.project_id}`} image_url={project.image_url} name={project.name} location={project.location} />
-                  })}
-                </>
-                : <h3>{`${org.name} will need volunteers soon.`}</h3>
-              }
-            </div>
+            {projects?.length > 0
+              ? <div className={styles.projects}>
+                {projects.map(project => {
+                  return <ProjectCard key={project.id} description={project.description} urlString={`/project/${project.project_id}`} image_url={project.image_url} name={project.name} location={project.location} />
+                })}
+              </div>
+              : <div className={styles.projectsEmpty}>
+                <h3>{`${org.name} will need volunteers soon.`}</h3>
+              </div>
+            }
           </>
           : null
         }
-        <button><Link href="/organization/all">Go Back</Link></button>
+        <Button className={styles.backButton} variant="contained">
+          <Link href="/organization/all">Go Back</Link>
+        </Button>
+
       </main>
     </>
   );
@@ -105,8 +107,8 @@ function ProjectCard({ urlString, image_url, name, location, description }) {
     <Link href={urlString}>
       <Box className={projectStyles.all_individual_box}>
         <Image
-          width={75}
-          height={75}
+          width={200}
+          height={200}
           src={image_url}
           quality={75}
           alt={`${name} image`}
@@ -119,4 +121,8 @@ function ProjectCard({ urlString, image_url, name, location, description }) {
       </Box>
     </Link>
   )
+}
+
+function LinkSVG() {
+  return (<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="arcs"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>)
 }
