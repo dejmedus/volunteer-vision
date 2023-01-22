@@ -30,7 +30,7 @@ export const Signup = ({ userProfile }) => {
         else {
             website = null;
         }
-        console.log(name, about, role, website);
+
         const supabase = getSupabase();
         try {
 
