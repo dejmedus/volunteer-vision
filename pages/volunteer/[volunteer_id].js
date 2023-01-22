@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Profile_Individual from "@/components/Project/Profile_Individual";
 import { Stack } from "@mui/material";
 
-// Individual project page
+// Individual volunteer page
 export default function Volunteer_Id({ user, userProfile }) {
   const router = useRouter()
   const { volunteer_id } = router.query

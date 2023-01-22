@@ -33,7 +33,7 @@ const Profile_Individual = ({ project_id, userProfile, hours, canDelete }) => {
       .delete()
       .eq("project_id", project_id)
       .eq("user_id", userProfile.id);
-    router.push(`/volunteer/${userProfile.id}`);
+    router.push(`/project/all`);
   };
 
   return (

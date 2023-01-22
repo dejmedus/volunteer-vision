@@ -8,6 +8,7 @@ import { Signup } from "../components/Signup/Signup";
 import Image from "next/image";
 import { Box } from "@mui/system";
 
+// Homepage
 export default function Home({ userProfile }) {
 
   return (
