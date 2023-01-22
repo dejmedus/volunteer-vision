@@ -1,0 +1,103 @@
+A platform that connects volunteers with local non-profit organizations and tracks volunteer hours and impact.
+Written By: dejmedus
+
+---------------------------------------------
+Initial scope
+
+1. Design/UI (Color scheme? Fonts?)
+2. Wix site
+	- Landing page
+	- Introduces our website & its purpose
+	- About/FAQs?
+	- Directs users to login/signup 
+3. Next.js site (Auth0, Twilio, Supabase DB)
+	a. Sign up as a volunteer or as an organization (Auth0 with Twilio?)
+	b. On first sign in fill out account details 
+		- Orgs: org name, about, website links/contact details
+		- Volunteers: name, about
+	c. Orgs can create & post projects that need volunteers
+		- Project: project name, description, time commitment, # of volunteers needed
+	d. Volunteers can view all projects
+	e. Volunteers can sign up for Org projects 
+	f. Projects Dashboard
+		- Volunteers can view all the projects they’ve joined
+		- Orgs can view all their projects
+		- Orgs can view all the volunteers that have joined their project
+	g. Tracking
+		- Volunteers can log their volunteer hours
+		- Orgs can track the total hours and impact of their volunteers
+	h. Allow Orgs to communicate with their project volunteers (good place to use Twilio?)
+		- notifications?
+		- mass email list?
+4. Domain name: VolunteerVision
+5. Devpost text description & Github README.md
+6. Submission demo video
+7. Categories (Wix, Auth0, Twilio, Domain name) proof of use screenshots for Devpost
+
+---------------------------------------------
+If we have time (Add ons)
+
++3b. More robust user accounts/initial signup forms
+	- Org: location
+	- Volunteers: location, skills
++3b. Can go into settings and change/update account info
++3c. Orgs can update/change details about a project they’ve posted
++3d. Volunteers can also filter opportunities
+	- by date, location, time commitment, skills needed
++3f. Volunteers can remove themselves from project
++3f. Volunteers can view/track the hours/impact of past projects
+
++    Volunteers can leave feedback on their experience with organizations/projects
++    Orgs can rate/leave feedback for volunteers
+
+---------------------------------------------
+Likely out of scope, but interesting to think about how to implement
+
+++3b. Some way to verify if Orgs are legitimate non-profits
+	- Allow admins to view and accept or decline Orgs
+++3e. When volunteers sign up to a project their application is initially pending
+	- Allows Orgs to accept or decline volunteers
+++3f. Some sort of achievement/impact visualization that volunteers could share on social media
+
+---------------------------------------------
+Initial Scope Pages
+
+Landing Page (domain.tech - Wix)
+	- What: what does our website do/offer
+	- Why: why orgs/volunteers should join
+	- How: easy to find login
+	- Login sends us to Auth0 login 
+			- Auth0 gives us user_id: user: {“sub": "auth0|63c848dad50ff29bf6d73363”}
+
+Signup Forms (subdomain.domain.tech - Next.js)
+	- Get Org info and add to DB
+	- Get volunteer info and add to DB
+Homepage 
+	- Navigation (logout)
+	- Volunteers can view all projects and join them
+			- Query all? projects from DB, display on page
+			- On join update project_volunteers? in DB
+			- Considerations: Pagination? Project cards modals or whole pages?
+	- Orgs can view their posted projects and the volunteers that have joined them
+			- Query all Org projects form DB, display on page
+	- Orgs can post new projects
+			- Get form data and add to DB
+Subpages
+	Project Page
+			- Can click on project card on homepage (which has project_id #)
+			- Use project_id for dynamic route/page 
+			- Query DB & show all project info
+	Organization Page
+			- Volunteers can click on Org name link (which has org_id #)
+			- Use org_id for dynamic route/page name
+			- Query DB & show all organization info
+	Volunteer Page
+			- Orgs can click/view volunteer profiles
+			- Query DB & show all volunteer info
+	Create new project form
+			- Get form data and add to DB
+	
+---------------------------------------------	
+Resources:
+	Supabase, Next.js, & Auth0 Guide - https://supabase.com/docs/guides/integrations/auth0
+	Auth0 & Twilio Guide - https://auth0.com/blog/enable-mfa-with-twilio-and-auth0/
