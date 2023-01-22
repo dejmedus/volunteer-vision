@@ -78,7 +78,8 @@
 }
 
 .post_form_textfield {
-  margin: 20px 0;
+  display: grid;
+  grid-gap: 20px;
   height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
