@@ -2,16 +2,31 @@ import Head from "next/head";
 import styles from "@/styles/Organization.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Navbar } from "../../components/Navbar";
+import Link from 'next/link';
 
 // Individual organization page
 export default function organization_id({ userProfile }) {
   const router = useRouter()
   const { organization_id } = router.query
 
+  const [org, setOrg] = useState([])
+  const supabase = getSupabase()
+
+  useEffect(() => {
+    const fetchOrg = async () => {
+      const { data } = await supabase.from('user').select('*').eq('id', organization_id);
+      setOrg(data[0]);
+      console.log(data[0]);
+    }
+
+    fetchOrg()
+  }, [])
+
   return (
+
     <>
       <Head>
         <title>Create Next App</title>
@@ -21,11 +36,14 @@ export default function organization_id({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        <h1>Project {organization_id}</h1>
-          Welcome {userProfile.name}!{' '}
-          <Link href="/api/auth/logout">
-            Logout
-          </Link>
+        {org != undefined
+          ? <>
+            <h1>{org.name}</h1>
+            <p>{org.about}</p>
+            <Link href={encodeURI(org.website)}>Vist the org.name website!</Link>
+          </>
+          : null
+        }
       </main>
     </>
   );
