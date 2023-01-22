@@ -1,17 +1,46 @@
 import Head from "next/head";
 import styles from "@/styles/Organization.module.css";
+import projectStyles from "@/styles/Project.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
 import { Navbar } from "../../components/Navbar";
+import Link from 'next/link';
+import { Box } from '@mui/system';
+import Image from "next/image";
 
 // Individual organization page
 export default function organization_id({ userProfile }) {
   const router = useRouter()
   const { organization_id } = router.query
 
+  const [org, setOrg] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const supabase = getSupabase()
+
+  useEffect(() => {
+    const fetchOrg = async () => {
+      const { data } = await supabase.from('user').select('*').eq('id', organization_id);
+      setOrg(data[0]);
+      console.log(data[0]);
+    }
+
+    const fetchProjects = async () => {
+      const { data } = await supabase.from('project').select('*').eq('user_id', organization_id);
+      console.log(data)
+      setProjects(data)
+    }
+
+    fetchOrg()
+    fetchProjects()
+  }, [])
+
+
+  // console.log(projects.length)
+
   return (
+
     <>
       <Head>
         <title>Create Next App</title>
@@ -21,11 +50,23 @@ export default function organization_id({ userProfile }) {
       </Head>
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
-        <h1>Project {organization_id}</h1>
-          Welcome {userProfile.name}!{' '}
-          <Link href="/api/auth/logout">
-            Logout
-          </Link>
+        {org != undefined
+          ? <>
+            <h1>{org.name}</h1>
+            <p>{org.about}</p>
+            <Link href={encodeURI(org.website)}>Vist the org.name website!</Link>
+            <div>
+              <h3>{`View ${org.name}'s current Projects`}</h3>
+              {projects?.length > 0
+                ? projects.map(project => {
+                  <ProjectCard urlString={`/project/${project.project_id}`} image_url={project.image_url} name={project.name} location={project.location} />
+                })
+                : null
+              }
+            </div>
+          </>
+          : null
+        }
       </main>
     </>
   );
@@ -55,3 +96,23 @@ export const getServerSideProps = withPageAuthRequired({
     }
   },
 });
+
+function ProjectCard({ urlString, image_url, name, location }) {
+  return (
+    <Link href={urlString}>
+      <Box className={projectStyles.all_individual_box}>
+        <Image
+          width={75}
+          height={75}
+          src={image_url}
+          quality={75}
+          alt="Project Image"
+        />
+        <Box className={projectStyles.all_individual_words}>
+          <h2>{name}</h2>
+          <h4>{location}</h4>
+        </Box>
+      </Box>
+    </Link>
+  )
+}

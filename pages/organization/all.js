@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Navbar } from "../../components/Navbar";
 
 // All organizations
-export default function all({ userProfile }) {
+export default function all({ orgs, userProfile }) {
   return (
     <>
       <Head>
@@ -15,13 +15,16 @@ export default function all({ userProfile }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar userProfile={userProfile}/>
+      <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         <h1>All Organizations</h1>
-          Welcome {userProfile.name}!{' '}
-          <Link href="/api/auth/logout">
-            Logout
-          </Link>
+        {orgs?.length > 0 ? (
+          orgs.map((org) => (
+            <Org key={org.id} name={org.name} about={org.about} id={org.id} />
+          ))
+        ) : (
+          <p>No Organizations Available...</p>
+        )}
       </main>
     </>
   );
@@ -36,6 +39,8 @@ export const getServerSideProps = withPageAuthRequired({
     const supabase = getSupabase(accessToken)
     let userProfile = null;
 
+    const { data: orgs } = await supabase.from('user').select('*').eq('role', 'org');
+
     try {
       // if no user has user_id of sub, create new user
       const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
@@ -47,7 +52,16 @@ export const getServerSideProps = withPageAuthRequired({
     }
 
     return {
-      props: { userProfile },
+      props: { orgs, userProfile },
     }
   },
 });
+
+function Org({ key, name, about, id }) {
+  return (
+    <div key={key}>
+      <Link href={`/organization/${id}`}>{name}</Link>
+      <p>{about}</p>
+    </div>
+  )
+}
