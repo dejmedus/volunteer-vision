@@ -44,6 +44,6 @@ For many of us, this was our first time using Supabase, Twilio, Auth0, and Wix i
 
 Although some of the team has used Next.js/React before, this project allowed everyone to gain more practical experience with them.
 
-## What's next for Coming soon
+## What's next for Volunteer Vision
 
  A fully functional mobile app would be our next move. An app would help connect even more people to great causes. We would also like to add a feedback system that allows volunteers and organizations to discuss their experiences and hopefully encourage more people to generously offer their time and skills.
