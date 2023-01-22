@@ -1,3 +1,4 @@
+/* [organization_id] */
 .main {
   padding: 4%;
   display: grid;
@@ -25,4 +26,22 @@
 .backButton {
   max-width: 200px;
   background-color: #0c322c;
+}
+
+/* Organization/all */
+.orgCard {
+  border: 1px solid sandybrown;
+  background-color: rgba(244, 165, 96, 0.055);
+  border-radius: 2px;
+  padding: 2em;
+  max-width: 70vw;
+}
+.orgCard:hover {
+  background-color: rgba(244, 165, 96, 0.096);
+}
+.orgCard h2 {
+  color: #0c322c;
+}
+.orgCard p {
+  padding: 1em 0;
 }

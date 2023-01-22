@@ -1,5 +1,5 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Organization.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../../utils/supabase";
 import Link from "next/link";
@@ -59,9 +59,9 @@ export const getServerSideProps = withPageAuthRequired({
 
 function Org({ key, name, about, id }) {
   return (
-    <div key={key}>
-      <Link href={`/organization/${id}`}>{name}</Link>
+    <Link className={styles.orgCard} key={key} href={`/organization/${id}`}>
+      <h2>{name}</h2>
       <p>{about}</p>
-    </div>
+    </Link>
   )
 }

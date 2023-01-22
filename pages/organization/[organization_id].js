@@ -38,8 +38,6 @@ export default function Organization_Id({ userProfile }) {
   }, [])
 
 
-  console.log(projects.length)
-
   return (
     <>
       <Head>
