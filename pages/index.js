@@ -2,16 +2,11 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { getSupabase } from "../utils/supabase";
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
 import { Navbar } from "../components/Navbar";
 import { Signup } from "../components/Signup/Signup";
 import Image from "next/image";
 import { Box } from "@mui/system";
-
-import { Navbar } from '../components/Navbar';
-import { Signup } from '../components/Signup/Signup';
 
 export default function Home({ userProfile }) {
 
@@ -34,7 +29,7 @@ export default function Home({ userProfile }) {
         />
         <Box my={2}>
           {!userProfile.role
-            ? <>
+            ? (<>
               <h1>Create your account</h1>
               <Signup userProfile={userProfile} />
             </>
@@ -42,7 +37,7 @@ export default function Home({ userProfile }) {
             <>
               <h1>Volunteer Vision</h1>
               <h2>Welcome, {userProfile.name}!</h2>
-            </>}
+            </>)}
         </Box>
       </main>
     </>
