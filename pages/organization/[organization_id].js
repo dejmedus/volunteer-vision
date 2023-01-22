@@ -11,7 +11,7 @@ import { Box } from '@mui/system';
 import Image from "next/image";
 
 // Individual organization page
-export default function organization_id({ userProfile }) {
+export default function Organization_Id({ userProfile }) {
   const router = useRouter()
   const { organization_id } = router.query
 

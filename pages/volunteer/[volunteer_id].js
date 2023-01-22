@@ -10,7 +10,7 @@ import Profile_Individual from "@/components/Project/Profile_Individual";
 import { Stack } from "@mui/material";
 
 // Individual project page
-export default function volunteer_id({ user, userProfile }) {
+export default function Volunteer_Id({ user, userProfile }) {
   const router = useRouter()
   const { volunteer_id } = router.query
 
@@ -45,30 +45,30 @@ export default function volunteer_id({ user, userProfile }) {
       <Navbar userProfile={userProfile} />
       <main className={styles.main}>
         <Box>
-        <h1>Volunteer ID: {volunteer_id}</h1>
-        {volunteer != undefined ? 
-        <Box>
-          <Box className={styles.volunteer_id_about}>
-          <h3>Name: {volunteer.name}</h3>
-          <h4>About: {volunteer.about}</h4>
-          </Box>
-          <Box className={styles.volunteer_id_events}>
-          <h3>I am volunteering at the following events:</h3>
-          <Stack spacing={1}>
-          {projects?.length > 0 ? projects.map((project, item) => (
-            
-            <Profile_Individual 
-              key={item}
-              project_id={project.project_id}
-              userProfile={userProfile}
-            />
-            
-          )) : <h4>None</h4>}
-          </Stack>
-          </Box>
-        </Box> : 
-          <h3>No volunteer for this ID was found...</h3>
-        }
+          <h1>Volunteer ID: {volunteer_id}</h1>
+          {volunteer != undefined ?
+            <Box>
+              <Box className={styles.volunteer_id_about}>
+                <h3>Name: {volunteer.name}</h3>
+                <h4>About: {volunteer.about}</h4>
+              </Box>
+              <Box className={styles.volunteer_id_events}>
+                <h3>I am volunteering at the following events:</h3>
+                <Stack spacing={1}>
+                  {projects?.length > 0 ? projects.map((project, item) => (
+
+                    <Profile_Individual
+                      key={item}
+                      project_id={project.project_id}
+                      userProfile={userProfile}
+                    />
+
+                  )) : <h4>None</h4>}
+                </Stack>
+              </Box>
+            </Box> :
+            <h3>No volunteer for this ID was found...</h3>
+          }
         </Box>
       </main>
     </>
@@ -85,7 +85,7 @@ export const getServerSideProps = withPageAuthRequired({
     let userProfile = null;
 
     const { data: projects } = await supabase.from('project').select('*');
-    
+
     try {
       // if no user has user_id of sub, create new user
       const { data } = await supabase.from('user').upsert({ user_id: sub }, { onConflict: 'user_id' }).select()
