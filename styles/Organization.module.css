@@ -91,12 +91,11 @@
 }
 
 .post_form_line {
-  margin: 20px 0;
+  width: 100%;
 }
 
 .post_form_textfield {
-  margin: 20px 0;
-  height: 100px;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }

@@ -9,7 +9,7 @@ import { Navbar } from "../../components/Navbar";
 import Link from "next/link";
 import { Box } from "@mui/system";
 import Image from "next/image";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 
 // Individual organization page
 export default function Organization_Id({ userProfile }) {
@@ -84,12 +84,14 @@ export default function Organization_Id({ userProfile }) {
             )}
           </>
         ) : null}
-        <Button className={styles.backButton} variant="contained">
-          <Link href="/organization/all">Go Back</Link>
-        </Button>
-        <Button className={styles.backButton} variant="contained">
-          <Link href="/organization/post">Add a project</Link>
-        </Button>
+        <Stack spacing={10} direction="row">
+          <Button className={styles.backButton} variant="contained">
+            <Link href="/organization/all">Go Back</Link>
+          </Button>
+          <Button className={styles.backButton} variant="contained" disabled={userProfile.id!=organization_id}>
+            <Link href="/organization/post">Add a project</Link>
+          </Button>
+        </Stack>
       </main>
     </>
   );
