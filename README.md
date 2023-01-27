@@ -2,7 +2,7 @@
 
 Volunteer Vision was built in a weekend for [Major League Hacking's](https://mlh.io) CivicHacks Hackathon. 
 
-*🎉 Awarded First Overall!*
+*🎉 Awarded [First Overall](https://devpost.com/software/coming-soon-jqsr5z)!*
 
 ## Inspiration
 
